@@ -32,6 +32,8 @@ def init_game(n):
     grid[n-1][0]=2
     i,j=get_new_position(grid)
     grid[i][j]=2
+    s,t=get_new_position(grid)
+    grid[s][t]=1
     return grid
 
 def grid_to_string(grid,n):
