@@ -4,7 +4,7 @@ Mix pac man/2048
 
 Le joueur joue un chiffre (2^n ) se déplaçant dans une grille carrée. Son objectif est d'atteindre 2048. 
 
-Pour cela, en plus du joueur il y a 2 types d'objets sur la grille de jeu : un objectif et un ennemi. L'objectif est un chiffre de même valeur que celui du joueur ( donc 2^n ) et l'ennemi un chiffre d'une puissance de 2 en dessous de celui du joueur ( donc 2^(n-1)). 
+Pour cela, en plus du joueur il y a 2 types d'objets sur la grille de jeu : un objectif et un ennemi. L'objectif est un chiffre de valeur 2^(n+1) que celui du joueur ( donc 2^n ) et l'ennemi un chiffre d'une puissance de 2 en dessous de celui du joueur ( donc 2^(n-1)). 
 
 Le joueur doit passer sur l'objectif pour voir sa valeur de n augmenter de 1 ( au premier tour, il joue un 2 et doit passer sur le 2 pour devenir un 4 ) et il doit éviter l'ennemi qui se déplace vers sous peine de game over.
 
