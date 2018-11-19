@@ -31,7 +31,7 @@ def init_game(n):
     grid=create_grid(n)
     grid[n-1][0]=2
     i,j=get_new_position(grid)
-    grid[i][j]=2
+    grid[i][j]=4
     s,t=get_new_position(grid)
     grid[s][t]=1
     return grid
@@ -39,11 +39,11 @@ def init_game(n):
 def grid_to_string(grid,n):
     a=""""""
     for i in range(n):
-        a=a+n*"="+ '\n'
+        a=a+n*"="+ ' \n'
         for j in range(n):
             value=str(grid[i][j])
             a+='| '+value+' '
-    a=a+n*"="+ '\n'
+    a=a+n*"="+ ' \n'
     return a
 
 def long_value(grid):
@@ -58,12 +58,12 @@ def grid_to_string_with_size(grid,n):
     longvalue=long_value(grid)
     a=""""""
     for i in range(n):
-        a+=n*(longvalue*"=")+'\n'
+        a+=n*(longvalue*"=")+ ' \n'
         for j in range(n):
             value=str(grid[i][j])
             l=len(value)
             a+='|'+value+(longvalue-l)*' '
-    a+=n*(longvalue*"=")+'\n'
+    a+=n*(longvalue*"=")+ ' \n'
     return a
 
 def add_objectif_at_grid(grid):
