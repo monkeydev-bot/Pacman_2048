@@ -26,6 +26,7 @@ def gameplay(n,value_max):
     return('Gagné !')
 
 
+
     
 def player_sur_objectif(grid,pos_player,pos_ennemy,pos_objectif):
     i0,j0=pos_player
