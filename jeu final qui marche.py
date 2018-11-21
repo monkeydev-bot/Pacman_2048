@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 def gameplay(n,value_max):
     grid=init_game(n)
     print(grid_to_string(grid))
@@ -6,20 +9,23 @@ def gameplay(n,value_max):
         pos_ennemi=get_position_ennemi(grid)
         pos_objectif=get_position_objectif(grid)
         command=read_player_command()
+
+        if move_impossible(grid,pos_player,command):
+            print("Mouvement impossible")
+            continue
+
         if move_pos_player(grid,pos_player,command)!=move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) and move_pos_player(grid,pos_player,command)!=pos_objectif and (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))!=(pos_ennemi,pos_player):
             grid=move_player(grid,pos_player,command)
             grid=move_ennemi(grid,pos_player,pos_ennemi,pos_objectif)
-            
             print(grid_to_string(grid))
-            
         elif move_pos_player(grid,pos_player,command)==move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) or (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))==(pos_ennemi,pos_player):
             return('game over')
-            
         else:
             grid=player_sur_objectif(grid,pos_player,pos_ennemi,pos_objectif)
             print(grid_to_string(grid))
-            
     return('Gagné !')
+
+
     
 def player_sur_objectif(grid,pos_player,pos_ennemy,pos_objectif):
     i0,j0=pos_player
@@ -33,12 +39,7 @@ def player_sur_objectif(grid,pos_player,pos_ennemy,pos_objectif):
     grid[abs_ennemy][ord_ennemy]=value_player/2
     return grid
 
-def move_player(grid,pos_player,commande):
-    old_abs_player,old_ord_player=pos_player
-    new_abs_player,new_ord_player=move_pos_player(grid,pos_player,commande)
-    grid[new_abs_player][new_ord_player]=grid[old_abs_player][old_ord_player]
-    grid[old_abs_player][old_ord_player]=0
-    return grid
+
     
 def test_move_player():
     assert move_player([[0, 4, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [2, 0, 0, 0]],(3,0),'up')==[[0, 4, 0, 0], [0, 0, 1, 0], [2, 0, 0, 0], [0, 0, 0, 0]]
@@ -266,7 +267,7 @@ def get_value_player(grid):
     
 
 def read_player_command():
-    command=input('Entrez une direction ( up,down,right or left ): ')
+    command=raw_input('Entrez une direction ( up,down,right or left ): ')
     return command
 
 
@@ -274,24 +275,24 @@ def move_pos_player(grid,pos_player,command):
     
     n=len(grid)
     
-    if command=='up':
+    if command=='up' or command=='z':
         if pos_player[0]==0:
             return ('Mouvement impossible' )
         else:
             
             return (pos_player[0]-1,pos_player[1])
-    elif command=='down':
+    elif command=='down' or command=='s':
         if pos_player[0]==n-1:
             return ('Mouvement impossible' )
         else:
             
             return (pos_player[0]+1,pos_player[1])
-    elif command=='right':
+    elif command=='right' or command=='d':
         if pos_player[1]==n-1:
             return ('Mouvement impossible' )
         else:
             return (pos_player[0], pos_player[1]+1)
-    elif command=='left':
+    elif command=='left' or command=='q':
         if pos_player[1]==0:
             return ('Mouvement impossible' )
         else:
@@ -344,3 +345,27 @@ def get_position_player(grid):
                 
 def test_get_position_player():
     assert get_position_player([[0,0,0,0],[0,0,4,0],[0,8,16,0],[0,0,0,0]])==(2,1)
+
+
+def move_player(grid,pos_player,commande):
+    old_abs_player,old_ord_player=pos_player
+    new_abs_player,new_ord_player=move_pos_player(grid,pos_player,commande)
+    grid[new_abs_player][new_ord_player]=grid[old_abs_player][old_ord_player]
+    grid[old_abs_player][old_ord_player]=0
+    return grid
+
+
+def move_impossible(grid,pos_player,command):
+    n=len(grid)
+    if (command=='up' or command=='z') and pos_player[0]==0 :
+        return True
+    if (command=='down' or command=='s') and pos_player[0]==n-1 :
+        return True
+    if (command=='right' or command=='d') and pos_player[1]==n-1 :
+        return True
+    if (command=='left' or command=='q') and pos_player[1]==0 :
+        return True
+
+
+
+gameplay(4,2048)
