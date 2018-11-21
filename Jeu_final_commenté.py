@@ -9,6 +9,11 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
         pos_ennemi=get_position_ennemi(grid)
         pos_objectif=get_position_objectif(grid)
         command=read_player_command()
+
+        if move_impossible(grid,pos_player,command):
+            print("Mouvement impossible")
+            continue
+
         if move_pos_player(grid,pos_player,command)!=move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) and move_pos_player(grid,pos_player,command)!=pos_objectif and (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))!=(pos_ennemi,pos_player):
             grid=move_player(grid,pos_player,command)
             grid=move_ennemi(grid,pos_player,pos_ennemi,pos_objectif)
@@ -230,31 +235,17 @@ def read_player_command():
     command=input('Entrez une direction ( up,down,right or left ): ')
     return command
 
-
-
-#Renvoie la nouvelle position du joueur en finction de la commande entrée par l'utilisateur, et renvoie "mouvement impossible" si mouvement impossible.
+#Renvoie la nouvelle position du joueur en finction de la commande entrée par l'utilisateur
 def move_pos_player(grid,pos_player,command):
     n=len(grid)
-    if command=='up':
-        if pos_player[0]==0:
-            return ('Mouvement impossible' )
-        else:
-            return (pos_player[0]-1,pos_player[1])
-    elif command=='down':
-        if pos_player[0]==n-1:
-            return ('Mouvement impossible' )
-        else:
-            return (pos_player[0]+1,pos_player[1])
-    elif command=='right':
-        if pos_player[1]==n-1:
-            return ('Mouvement impossible' )
-        else:
-            return (pos_player[0], pos_player[1]+1)
-    elif command=='left':
-        if pos_player[1]==0:
-            return ('Mouvement impossible' )
-        else:
-             return (pos_player[0], pos_player[1]-1)
+    if command=='up' or command=='z':
+        return (pos_player[0]-1,pos_player[1])
+    if command=='down' or command=='s':
+        return (pos_player[0]+1,pos_player[1])
+    if command=='right' or command=='d':
+        return (pos_player[0], pos_player[1]+1)
+    if command=='left' or command=='q':
+        return (pos_player[0], pos_player[1]-1)
 
 #
 def test_get_value_in_grid():
@@ -294,5 +285,16 @@ def get_position_player(grid):
 #
 def test_get_position_player():
     assert get_position_player([[0,0,0,0],[0,0,4,0],[0,8,16,0],[0,0,0,0]])==(2,1)
+
+def move_impossible(grid,pos_player,command):
+    n=len(grid)
+    if (command=='up' or command=='z') and pos_player[0]==0 :
+        return True
+    if (command=='down' or command=='s') and pos_player[0]==n-1 :
+        return True
+    if (command=='right' or command=='d') and pos_player[1]==n-1 :
+        return True
+    if (command=='left' or command=='q') and pos_player[1]==0 :
+        return True
 
 gameplay(4,512)
