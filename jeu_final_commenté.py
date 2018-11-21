@@ -12,10 +12,11 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
         pos_ennemi=get_position_ennemi(grid)
         pos_objectif=get_position_objectif(grid)
         command=read_player_command()
+        #seules les commandes valides sont acceptées
         if command not in liste_commandes:
             print("Commande invalide")
             continue
-
+        #seuls les mouvements possibles sont acceptés
         if move_impossible(grid,pos_player,command):
             print("Mouvement impossible")
             continue
