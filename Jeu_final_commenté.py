@@ -230,6 +230,8 @@ def read_player_command():
     command=input('Entrez une direction ( up,down,right or left ): ')
     return command
 
+
+
 #Renvoie la nouvelle position du joueur en finction de la commande entrée par l'utilisateur, et renvoie "mouvement impossible" si mouvement impossible.
 def move_pos_player(grid,pos_player,command):
     n=len(grid)
