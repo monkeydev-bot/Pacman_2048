@@ -23,5 +23,5 @@ Fonctionnalité 4 : Déplacer les différents objets de la grille.
 
 Fonctionnalité 5 : Assembler les différentes fonctions et finaliser notre jeu.
 
-Sami test test
+Sami TEST
 
