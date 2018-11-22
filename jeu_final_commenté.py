@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from random import randint
 
 #Lance le jeu dans son ensemble
@@ -31,6 +34,7 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
     return()
 
 #Lorsque le joueur atteint l'objectif, celui double de valeur et change de place aléatoirement. Le joueur double de valeur.L'ennemi double de valeur.
+#aléatoire
 def player_sur_objectif(grid,pos_player,pos_ennemy,pos_objectif):
     i0,j0=pos_player
     grid[i0][j0]=0 #l'ancienne case du joueur est remplacée par un 0
@@ -122,7 +126,7 @@ def grid_to_string_with_size(grid,n):
     a+=n*(longvalue*"=")+ ' \n'
     return a
 
-#Retourne la nouvelle position de l'objectif. Non testée.
+#Retourne la nouvelle position de l'objectif. Non testée. (aléatoire)
 def add_objectif_at_grid(grid):
     i,j=get_new_position(grid)
     return (i,j)
@@ -202,11 +206,11 @@ def get_position_player(grid):
 
 
 
-#Retourne la valeur de l'objectif
+#Retourne la valeur de l'objectif. Testée.
 def get_value_objectif(grid):
     return(max(get_value_in_grid(grid))) #l'objectif a la plus grande valeur de la grille
 
-#Renvoie une liste contenant toutes les valeurs présente dans la grille
+#Renvoie une liste contenant toutes les valeurs présente dans la grille.Testée.
 def get_value_in_grid(grid):
     l=[]
     for i in range(len(grid)):
@@ -214,7 +218,7 @@ def get_value_in_grid(grid):
             l.append(grid[i][j])
     return(l)
 
-#Renvoie la valeur du joueur
+#Renvoie la valeur du joueur.
 def get_value_player(grid):
     return (get_value_objectif(grid)/2)#la valeur du joueur est la moitié de celle de l'objectif
 
@@ -243,7 +247,7 @@ def test_get_value_in_grid():
 def test_get_value_objectif():
     assert get_value_objectif([[0,0,0,0],[0,0,0,0],[0,8,16,0],[4,0,0,0]])==16
 
-#Renvoie la position de l'objectif sous forme d'un couple
+#Renvoie la position de l'objectif sous forme d'un couple. Testée.
 def get_position_objectif(grid):
     for i in range(len(grid)):
         for j in range(len(grid)):
@@ -254,7 +258,7 @@ def get_position_objectif(grid):
 def test_get_position_objectif():
     assert get_position_objectif([[0,0,0,0],[0,0,4,0],[0,8,16,0],[0,0,0,0]])==(2,2)
 
-#Renvoie la position de l'ennemi sous forme d'un couple
+#Renvoie la position de l'ennemi sous forme d'un couple. Testée.
 def get_position_ennemi(grid) :
     for i in range(len(grid)):
         for j in range(len(grid)):
@@ -264,7 +268,7 @@ def get_position_ennemi(grid) :
 def test_get_position_ennemi():
     assert get_position_ennemi([[0,0,0,0],[0,0,4,0],[0,8,16,0],[0,0,0,0]])==(1,2)
 
-#Renvoie la position du joueur sous forme d'un couple
+#Renvoie la position du joueur sous forme d'un couple. Testée
 def get_position_player(grid):
     for i in range(len(grid)):
         for j in range(len(grid)):
@@ -284,5 +288,17 @@ def move_impossible(grid,pos_player,command):
         return True
     if (command=='left' or command=='q') and pos_player[1]==0 :
         return True
+    return False
+
+def test_move_impossible():
+    assert([[0, 0, 0, 0, 0], [0, 0, 0, 8, 0], [4, 0, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (2,0), "left")==True
+    assert([[0, 0, 0, 0, 0], [0, 0, 0, 8, 0], [0, 4, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (2,1), "left")==False
+    assert([[0, 4, 0, 0, 0], [0, 0, 0, 8, 0], [0, 0, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (0,1), "up")==True
+    assert([[0, 0, 0, 0, 0], [0, 4, 0, 8, 0], [0, 0, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (1,1), "up")==False
+    assert([[0, 0, 0, 0, 0], [0, 0, 0, 8, 0], [0, 0, 0, 0, 4], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (2,4), "right")==True
+    assert([[0, 0, 0, 0, 0], [0, 0, 0, 8, 0], [0, 0, 0, 4, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (2,3), "right")==False
+    assert([[0, 4, 0, 0, 0], [0, 0, 0, 8, 0], [0, 0, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 0]], (0,1), "down")==False
+    assert([[0, 0, 0, 0, 0], [0, 0, 0, 8, 0], [0, 0, 0, 0, 0], [0, 0, 0, 2, 0], [0, 0, 0, 0, 4]], (4,4), "down")==True
 
 
+test_move_impossible()

@@ -369,4 +369,4 @@ def move_impossible(grid,pos_player,command):
 
 
 
-gameplay(4,2048)
+gameplay(5,2048)
