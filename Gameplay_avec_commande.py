@@ -33,7 +33,6 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
                     print("Mouvement impossible")
                     continue
 
-
                 if move_pos_player(grid,pos_player,command)!=move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) and move_pos_player(grid,pos_player,command)!=pos_objectif and (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))!=(pos_ennemi,pos_player):
                     grid=move_player(grid,pos_player,command)
                     grid=move_ennemi(grid,pos_player,pos_ennemi,pos_objectif)
