@@ -269,6 +269,25 @@ def move_pos_player(grid,pos_player,command):
     if command=='left' or command=='q':
         return (pos_player[0], pos_player[1]-1)
 
+def move_pos_player_sans_murs(grid,pos_player,command):
+    n=len(grid)
+    if command=='up':
+        if pos_player[0]==0:
+            return (n-1,pos_player[1])
+        return (pos_player[0]-1,pos_player[1])
+    if command=='down':
+        if pos_player[0]==n-1:
+            return (0,pos_player[1])
+        return (pos_player[0]+1,pos_player[1])
+    if command=='right':
+        if pos_player[1]==n-1:
+            return(pos_player[0],0)
+        return (pos_player[0], pos_player[1]+1)
+    if command=='left':
+        if pos_player[1]==0:
+            return (pos_player[0], n-1)
+        return(pos_player[0],pos_player[1]-1)
+
 
 #
 def test_get_value_in_grid():
@@ -320,4 +339,4 @@ def move_impossible(grid,pos_player,command):
     if (command=='left' or command=='q') and pos_player[1]==0 :
         return True
 
-gameplay(4,512)
+gameplay(8,512)
