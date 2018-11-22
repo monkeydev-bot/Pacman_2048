@@ -241,7 +241,7 @@ def get_value_player(grid):
 
 #Renvoie la direction entrée par l'utilisateur
 def read_player_command():
-    command=input("Entrez une direction ( up,down,right or left ): ")
+    command=raw_input("Entrez une direction ( up,down,right or left ): ")
     return command
 
 
