@@ -1,4 +1,8 @@
-from Pacman2048.Jeu_final_commenté import *
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+from nouveau_jeu_qui_d-chire.
 
 
 

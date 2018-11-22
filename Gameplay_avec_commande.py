@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from random import randint
 import pygame
 from pygame.locals import *
@@ -18,11 +19,8 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
                 if event.key == K_UP:
                     command = 'up'
 
-
                 if event.key == K_DOWN:
                     command = 'down'
-
-
 
                 if event.key == K_RIGHT:
                     command = 'right'
@@ -31,15 +29,10 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
                 pos_player=get_position_player(grid)
                 pos_ennemi=get_position_ennemi(grid)
                 pos_objectif=get_position_objectif(grid)
-
-                #seules les commandes valides sont acceptées
-                if command not in liste_commandes:
-                    print("Commande invalide")
-                    continue
-                #seuls les mouvements possibles sont acceptés
                 if move_impossible(grid,pos_player,command):
                     print("Mouvement impossible")
                     continue
+
 
                 if move_pos_player(grid,pos_player,command)!=move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) and move_pos_player(grid,pos_player,command)!=pos_objectif and (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))!=(pos_ennemi,pos_player):
                     grid=move_player(grid,pos_player,command)
@@ -48,7 +41,7 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
 
                 elif move_pos_player(grid,pos_player,command)==move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) or (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))==(pos_ennemi,pos_player):
                     print('game over')
-                    continuer=0
+                    continuer=False
 
                 else:
                     grid=player_sur_objectif(grid,pos_player,pos_ennemi,pos_objectif)
@@ -261,7 +254,7 @@ def get_value_player(grid):
 
 #Renvoie la direction entrée par l'utilisateur
 def read_player_command():
-    command=input("Entrez une direction ( up,down,right or left ): ")
+    command=raw_input("Entrez une direction ( up,down,right or left ): ")
     return command
 
 
