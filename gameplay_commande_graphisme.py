@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import fenetre_fin
 
 pygame.init()
 
@@ -135,12 +136,15 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
                     grid_to_graphismes(grid)
 
                 elif move_pos_player(grid,pos_player,command)==move_pos_ennemi(pos_player,pos_ennemi,pos_objectif) or (move_pos_player(grid,pos_player,command),move_pos_ennemi(pos_player,pos_ennemi,pos_objectif))==(pos_ennemi,pos_player):
+                    fenetre_game_over()
                     print('game over')
                     continuer=0
 
                 else:
                     grid=player_sur_objectif(grid,pos_player,pos_ennemi,pos_objectif)
                     grid_to_graphismes(grid)
+
+    fenetre_game_win()
 
     return('Gagné !')
 
@@ -416,4 +420,42 @@ def move_impossible(grid,pos_player,command):
     if (command=='left' or command=='q') and pos_player[1]==0 :
         return True
 
-gameplay(5,512)
+
+
+
+pygame.init()
+
+# Ouverture de la fenêtre Pygame
+fenetre = pygame.display.set_mode((640, 480))
+
+
+
+def fenetre_game_over():
+    pygame.init()
+    continuer=1
+    while continuer:
+        fenetre = pygame.display.set_mode((640, 480))
+
+        fenetre.fill((200, 200, 200))
+        graphismes(5)
+        game_over = pygame.image.load("game_over.jpg").convert_alpha()
+        fenetre.blit(game_over,(0,0))
+        pygame.display.flip()
+
+
+fenetre_game_over()
+
+def fenetre_game_win():
+    pygame.init()
+    continuer=1
+    while continuer:
+        fenetre = pygame.display.set_mode((640, 480))
+
+        fenetre.fill((200, 200, 200))
+        graphismes(5)
+        game_win = pygame.image.load("game_win.jpg").convert_alpha()
+        fenetre.blit(game_win,(0,0))
+        pygame.display.flip()
+
+
+gameplay(5,2048)
