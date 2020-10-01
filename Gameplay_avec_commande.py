@@ -339,4 +339,4 @@ def move_impossible(grid,pos_player,command):
     if (command=='left' or command=='q') and pos_player[1]==0 :
         return True
 
-gameplay(8,512)
+gameplay(8,512) 
