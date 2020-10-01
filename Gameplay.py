@@ -28,7 +28,7 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
             print(grid_to_string(grid))
 
     print("Victoire !")
-    return()
+    return() 
 
 
 
