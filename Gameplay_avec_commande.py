@@ -5,13 +5,13 @@ from pygame.locals import *
 pygame.init()
 
 #Lance le jeu dans son ensemble
-def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendre pour gagner
+def gameplay(n,value_max): #n: taille de la grille, value_max : score a attendre pour gagner
     grid=init_game(n)
     print(grid_to_string(grid))
     continuer = True
     while continuer:
 
-        for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
+        for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
 
             if event.type == KEYDOWN:
                 if event.key == K_UP:
@@ -44,28 +44,28 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
                     grid=player_sur_objectif(grid,pos_player,pos_ennemi,pos_objectif)
                     print(grid_to_string(grid))
 
-    return('Gagné !')
+    return('Gagne !')
 
 liste_commandes=['up','down','left','right','q','z','s','d']
 
-#Lorsque le joueur atteint l'objectif, celui double de valeur et change de place aléatoirement. Le joueur double de valeur.L'ennemi double de valeur.
+#Lorsque le joueur atteint l'objectif, celui double de valeur et change de place aleatoirement. Le joueur double de valeur.L'ennemi double de valeur.
 def player_sur_objectif(grid,pos_player,pos_ennemy,pos_objectif):
     i0,j0=pos_player
-    grid[i0][j0]=0 #l'ancienne case du joueur est remplacée par un 0
+    grid[i0][j0]=0 #l'ancienne case du joueur est remplacee par un 0
     pos_player=pos_objectif
-    i1,j1=get_new_position(grid)  #Nouvelle position de l'objectif, choisit aléatoirement
+    i1,j1=get_new_position(grid)  #Nouvelle position de l'objectif, choisit aleatoirement
     new_abs_player,new_ord_player=pos_player
     value_player=grid[new_abs_player][new_ord_player] # On prend la valeur du joueur
-    grid[i1][j1]=2*value_player #la valeur de l'objectif est doublée par rapport au joueur
+    grid[i1][j1]=2*value_player #la valeur de l'objectif est doublee par rapport au joueur
     abs_ennemy,ord_ennemy=pos_ennemy
-    grid[abs_ennemy][ord_ennemy]=value_player/2 #la valeur de l'ennemi est la moitié de celle du joueur
+    grid[abs_ennemy][ord_ennemy]=value_player/2 #la valeur de l'ennemi est la moitie de celle du joueur
     return grid
 
-#Change la place du joueur sur la grille suite à une commande
+#Change la place du joueur sur la grille suite a une commande
 def move_player(grid,pos_player,commande):
     old_abs_player,old_ord_player=pos_player
     new_abs_player,new_ord_player=move_pos_player(grid,pos_player,commande) #Nouvelle position du joueur
-    grid[new_abs_player][new_ord_player]=grid[old_abs_player][old_ord_player] #Mise à jour de la nouvelle position
+    grid[new_abs_player][new_ord_player]=grid[old_abs_player][old_ord_player] #Mise a jour de la nouvelle position
     grid[old_abs_player][old_ord_player]=0 #l'ancienne position vaut 0
     return grid
 
@@ -77,11 +77,11 @@ def test_move_player():
 def move_ennemi(grid,pos_player,pos_ennemy,pos_objectif):
     old_abs_ennemy, old_ord_ennemy=pos_ennemy
     new_abs_ennemy, new_ord_ennemy=move_pos_ennemi(pos_player,pos_ennemy,pos_objectif) #Nouvelle position de l'ennemi
-    grid[new_abs_ennemy][new_ord_ennemy]=grid[old_abs_ennemy][old_ord_ennemy] #Mise à jour de la nouvelle position
+    grid[new_abs_ennemy][new_ord_ennemy]=grid[old_abs_ennemy][old_ord_ennemy] #Mise a jour de la nouvelle position
     grid[old_abs_ennemy][old_ord_ennemy]=0 #l'ancienne position vaut 0
     return grid
 
-#Crée une grille de taille nxn remplie de 0
+#Cree une grille de taille nxn remplie de 0
 def create_grid(n):
     grid=[]
     for i in range(n):
@@ -89,7 +89,7 @@ def create_grid(n):
         grid.append(s)
     return grid
 
-#Ajoute un 2**m à la position i,j de grid
+#Ajoute un 2**m a la position i,j de grid
 def grid_add_new_tile_at_position(grid,i,j,m):
     grid[i][j]==2**m
     return grid
@@ -104,14 +104,14 @@ def get_empty_tiles_positions(grid):
                 pos.append((i,j))
     return pos
 
-#Renvoie une position aléatoire parmis les positions non occupées
+#Renvoie une position aleatoire parmis les positions non occupees
 def get_new_position(grid):
     pos=get_empty_tiles_positions(grid)
     n=len(pos)
     a=randint(0,n-1)
     return pos[a]
 
-#Crée la grille initiale avec le joueur en bas à gauche, l'ennemi placé aléatoirement et l'objectif placé aléatoirement
+#Cree la grille initiale avec le joueur en bas a gauche, l'ennemi place aleatoirement et l'objectif place aleatoirement
 def init_game(n):
     grid=create_grid(n)
     grid[n-1][0]=2 #positionnement du joueur
@@ -121,7 +121,7 @@ def init_game(n):
     grid[s][t]=1 #positionnement de l'ennemi
     return grid
 
-#Fonction non utilisée. Renvoie la taille de la plus grande chaine de caractères présente dans la grille.
+#Fonction non utilisee. Renvoie la taille de la plus grande chaine de caracteres presente dans la grille.
 def long_value(grid):
     m=0
     for x in grid:
@@ -130,7 +130,7 @@ def long_value(grid):
                 m=len(str(y))
     return m
 
-#Fonction non utilisée.
+#Fonction non utilisee.
 def grid_to_string_with_size(grid,n):
     longvalue=long_value(grid)
     a=""""""
@@ -148,7 +148,7 @@ def add_objectif_at_grid(grid):
     i,j=get_new_position(grid)
     return (i,j)
 
-#Affiche la grille de manière "propre" dans la console
+#Affiche la grille de maniere "propre" dans la console
 def grid_to_string(grid):
 
     THEMES = {
@@ -179,7 +179,7 @@ def move_pos_ennemi(position_player, position_ennemi, position_objectif):
     ligne_ennemi, colonne_ennemi = position_ennemi
     ligne_player, colonne_player = position_player
     ligne_objectif, colonne_objectif = position_objectif
-    if ligne_ennemi == ligne_player : #Si l'ennemi et le joueur sont sur la même ligne, l'ennemi avance vers le joueur. Si il est derrière l'objectif, il saute l'objectif en sautant de 2 places.
+    if ligne_ennemi == ligne_player : #Si l'ennemi et le joueur sont sur la même ligne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
         if (colonne_player < colonne_ennemi) and (ligne_ennemi != ligne_objectif or colonne_ennemi != colonne_objectif + 1 ) :
             colonne_ennemi -= 1
         elif (colonne_player < colonne_ennemi) and (ligne_ennemi == ligne_objectif and colonne_ennemi == colonne_objectif + 1 ):
@@ -188,7 +188,7 @@ def move_pos_ennemi(position_player, position_ennemi, position_objectif):
             colonne_ennemi += 1
         else:
             colonne_ennemi += 2
-    elif colonne_ennemi == colonne_player: #Si l'ennemi et le joueur sont sur la même colonne, l'ennemi avance vers le joueur. Si il est derrière l'objectif, il saute l'objectif en sautant de 2 places.
+    elif colonne_ennemi == colonne_player: #Si l'ennemi et le joueur sont sur la même colonne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
         if (ligne_player < ligne_ennemi) and (colonne_ennemi != colonne_objectif or ligne_ennemi != ligne_objectif + 1 ) :
             ligne_ennemi -= 1
         elif (ligne_player < ligne_ennemi) and (colonne_ennemi == colonne_objectif and ligne_ennemi == ligne_objectif + 1 ):
@@ -197,7 +197,7 @@ def move_pos_ennemi(position_player, position_ennemi, position_objectif):
             ligne_ennemi += 1
         else:
             ligne_ennemi += 2
-    elif (colonne_player > colonne_ennemi) and (ligne_ennemi != ligne_objectif or colonne_ennemi!=colonne_objectif -1): #Si la colonne du joueur et celle de l'ennemi sont différentes, l'ennemi change de colonne, vers le joueur.
+    elif (colonne_player > colonne_ennemi) and (ligne_ennemi != ligne_objectif or colonne_ennemi!=colonne_objectif -1): #Si la colonne du joueur et celle de l'ennemi sont differentes, l'ennemi change de colonne, vers le joueur.
         colonne_ennemi+= 1
     elif (colonne_player > colonne_ennemi) and (ligne_ennemi == ligne_objectif or colonne_ennemi==colonne_objectif -1):#Si il y a l'objectif, l'ennemi change de ligne, en allant vers le joueur
         if (ligne_player > ligne_ennemi):
@@ -230,14 +230,14 @@ def test_move_pos_ennemi():
 def get_position_player(grid):
     for i in range(len(grid)):
         for j in range(len(grid)):
-            if grid[i][j]==(get_value_objectif(grid)/2): #la valeur du joueur est la moitié de celle de l'objectif
+            if grid[i][j]==(get_value_objectif(grid)/2): #la valeur du joueur est la moitie de celle de l'objectif
                 return((i,j))
 
 #Retourne la valeur de l'objectif
 def get_value_objectif(grid):
     return(max(get_value_in_grid(grid))) #l'objectif a la plus grande valeur de la grille
 
-#Renvoie une liste contenant toutes les valeurs présente dans la grille
+#Renvoie une liste contenant toutes les valeurs presente dans la grille
 def get_value_in_grid(grid):
     l=[]
     for i in range(len(grid)):
@@ -247,15 +247,15 @@ def get_value_in_grid(grid):
 
 #Renvoie la valeur du joueur
 def get_value_player(grid):
-    return (get_value_objectif(grid)/2)#la valeur du joueur est la moitié de celle de l'objectif
+    return (get_value_objectif(grid)/2)#la valeur du joueur est la moitie de celle de l'objectif
 
-#Renvoie la direction entrée par l'utilisateur
+#Renvoie la direction entree par l'utilisateur
 def read_player_command():
     command=raw_input("Entrez une direction ( up,down,right or left ): ")
     return command
 
 
-#Renvoie la nouvelle position du joueur en finction de la commande entrée par l'utilisateur
+#Renvoie la nouvelle position du joueur en finction de la commande entree par l'utilisateur
 def move_pos_player(grid,pos_player,command):
     n=len(grid)
     if command=='up' or command=='z':
