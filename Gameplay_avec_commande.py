@@ -179,7 +179,7 @@ def move_pos_ennemi(position_player, position_ennemi, position_objectif):
     ligne_ennemi, colonne_ennemi = position_ennemi
     ligne_player, colonne_player = position_player
     ligne_objectif, colonne_objectif = position_objectif
-    if ligne_ennemi == ligne_player : #Si l'ennemi et le joueur sont sur la même ligne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
+    if ligne_ennemi == ligne_player : #Si l'ennemi et le joueur sont sur la meme ligne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
         if (colonne_player < colonne_ennemi) and (ligne_ennemi != ligne_objectif or colonne_ennemi != colonne_objectif + 1 ) :
             colonne_ennemi -= 1
         elif (colonne_player < colonne_ennemi) and (ligne_ennemi == ligne_objectif and colonne_ennemi == colonne_objectif + 1 ):
@@ -188,7 +188,7 @@ def move_pos_ennemi(position_player, position_ennemi, position_objectif):
             colonne_ennemi += 1
         else:
             colonne_ennemi += 2
-    elif colonne_ennemi == colonne_player: #Si l'ennemi et le joueur sont sur la même colonne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
+    elif colonne_ennemi == colonne_player: #Si l'ennemi et le joueur sont sur la meme colonne, l'ennemi avance vers le joueur. Si il est derriere l'objectif, il saute l'objectif en sautant de 2 places.
         if (ligne_player < ligne_ennemi) and (colonne_ennemi != colonne_objectif or ligne_ennemi != ligne_objectif + 1 ) :
             ligne_ennemi -= 1
         elif (ligne_player < ligne_ennemi) and (colonne_ennemi == colonne_objectif and ligne_ennemi == ligne_objectif + 1 ):
