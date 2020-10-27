@@ -2,6 +2,9 @@ from random import randint
 
 #Lance le jeu dans son ensemble
 def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendre pour gagner
+    """
+    Play a player.
+    """
     grid=init_game(n)
     print(grid_to_string(grid))
     while get_value_player(grid)<value_max:
@@ -29,6 +32,7 @@ def gameplay(n,value_max): #n: taille de la grille, value_max : score à attendr
 
     print("Victoire !")
     return() 
+
 
 
 
